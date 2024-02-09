@@ -1,0 +1,44 @@
+-- Create Marvel database if it doesn't exist
+CREATE DATABASE IF NOT EXISTS Marvel_DB;
+
+-- Use Marvel database
+USE Marvel_DB;
+
+-- Create Users table
+CREATE TABLE Users (
+    UserID INT AUTO_INCREMENT PRIMARY KEY,
+    UserName VARCHAR(255) UNIQUE,
+    EmailAddress VARCHAR(255) UNIQUE,
+    Password VARCHAR(255),
+    FirstName VARCHAR(255),
+    LastName VARCHAR(255),
+    City VARCHAR(255),
+    State VARCHAR(255),
+    Zip INT
+);
+
+-- Create CachedComics table
+CREATE TABLE CachedComics (
+    ComicID INT AUTO_INCREMENT PRIMARY KEY,
+    Title VARCHAR(255),
+    Year INT,
+    CharacterID INT,
+    FOREIGN KEY (CharacterID) REFERENCES CachedCharacters(CharacterID)
+);
+
+-- Create CachedCharacters table
+CREATE TABLE CachedCharacters (
+    CharacterID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(255)
+);
+
+-- Create ForumComments table
+CREATE TABLE ForumComments (
+    CommentID INT AUTO_INCREMENT PRIMARY KEY,
+    UserID INT,
+    UserName VARCHAR(255),
+    TimeDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Comment TEXT,
+    CommTimeDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
