@@ -1,0 +1,44 @@
+<!-- pages/templates/pages/forum.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf=8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="forum.css">
+</head>
+<body>
+    <div class="chat">
+        <div class="chat-screen">
+            <div class="header">
+                <div class="logo"> Chatroom </div>
+                <button id="exit_chat">Exit</button>
+            </div>
+            <div class="messages">
+                <!-- Example messages-->
+                <div class="message my-messages">
+                    <div>
+                        <div class="name">You</div>
+                        <div class="text">Insert User Text Here</div>
+                    </div>
+                </div>
+
+                <div class="update">
+                    Another person has joined the chat!
+                </div>
+
+                <div class="message other-messages">
+                    <div>
+                        <div class="name">Otherguy</div>
+                        <div class="text">Other guy text</div>
+                    </div>
+                </div>
+            </div>
+            <div class="typebox">
+                <input type="text" id="message-input">
+                <button id="send-message">Send</button>
+            </div>
+        </div>
+
+        <!-- Will install socket to have client and server side to have a chatrom-->
+</body>
+</html>
