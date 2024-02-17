@@ -17,6 +17,13 @@ CREATE TABLE Users (
     Zip INT
 );
 
+
+-- Create CachedCharacters table
+CREATE TABLE CachedCharacters (
+    CharacterID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(255)
+);
+
 -- Create CachedComics table
 CREATE TABLE CachedComics (
     ComicID INT AUTO_INCREMENT PRIMARY KEY,
