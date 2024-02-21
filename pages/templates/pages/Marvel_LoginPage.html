@@ -2,13 +2,15 @@
 <!-- Pathway of Marvels Greatest Login Page. -->
 <html lang="en">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="Marvel_LoginStyle.css">
+{%load static%}
+<link rel="stylesheet" href=" {% static 'Marvel_LoginStyle.css' %}">
 <body>
 
 <h2>Pathway of Marvels Greatest Sign in</h2>
 <form action="action_page.php" method="post">
     <div class="imgcontainer">
-      <img src="pngs/Silver_Surfer.png" alt="Silver Surfer" class="Silver_Surfer">
+      {% load static %}
+      <img src="{% static '/Silver_Surfer.png' %}" alt="Silver Surfer" class="Silver_Surfer">
     </div>
   
     <div class="container">
