@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 class Users(models.Model):
@@ -12,21 +13,41 @@ class Users(models.Model):
     zipcode = models.IntegerField()
 
 
-class CachedCharacters(models.Model):
+class Characters(models.Model):
     name = models.CharField(max_length=255)
 
 
-class CachedComics(models.Model):
+class Comics(models.Model):
     title = models.CharField(max_length=255)
-    year = models.IntegerField()
-    character_id = models.IntegerField()
-    character_id2 = models.ForeignKey(CachedCharacters, on_delete=models.CASCADE)
+    publicationDate = models.DateField()
+    summary = models.TextField()
+    linkForPurchase = models.CharField(max_length=500)
+    characters = models.ManyToManyField(Characters, through="ComicCharacters")
 
+class ComicCharacters(models.Model):
+    character = models.ForeignKey(Characters, on_delete=models.CASCADE)
+    comic = models.ForeignKey(Comics, on_delete=models.CASCADE)
+
+
+class Reviews(models.Model):
+    title = models.CharField(max_length=255)
+    reviewDate = models.DateField()
+    body = models.TextField()
+    rating = models.IntegerField(default=5,
+        validators=[
+            MaxValueValidator(5),
+            MinValueValidator(1)
+        ])
+    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    comic = models.ForeignKey(Comics, on_delete=models.CASCADE)
 
 class ForumComments(models.Model):
-    user_id = models.IntegerField()
-    user_name = models.CharField(max_length=255)
     time_date = models.DateTimeField()
     comment = models.TextField()
     comm_time_date = models.DateTimeField()
-    fKey = models.ForeignKey(Users, on_delete=models.CASCADE)
+    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+
+class Bookmarks(models.Model):
+    link = models.CharField(max_length=500)
+    creationDate = models.DateTimeField()
+    user = models.ForeignKey(Users, on_delete=models.CASCADE)
