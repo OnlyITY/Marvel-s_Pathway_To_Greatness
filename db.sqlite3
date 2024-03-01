@@ -33,12 +33,6 @@ CREATE TABLE CachedComics (
     FOREIGN KEY (CharacterID) REFERENCES CachedCharacters(CharacterID)
 );
 
--- Create CachedCharacters table
-CREATE TABLE CachedCharacters (
-    CharacterID INT AUTO_INCREMENT PRIMARY KEY,
-    Name VARCHAR(255)
-);
-
 -- Create ForumComments table
 CREATE TABLE ForumComments (
     CommentID INT AUTO_INCREMENT PRIMARY KEY,
