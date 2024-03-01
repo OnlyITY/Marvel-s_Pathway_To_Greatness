@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from django.http from django.http import JsonResponse
-from .models import CachedCharacters
+from django.http import JsonResponse
+from pages.models import CachedCharacters
 
 # Create your views here.
 
@@ -18,7 +18,7 @@ def loginpage(request):
 
 def character_name_suggestions(request):
     query = request.GET.get('query', '')
-    suggestions = CachedCharacters.objects.fil;ter(name__icontains=query)[:3]  #Gets up to 3 suggestions
-    suggestion_list = [character.name for charachter in suggestions]
+    suggestions = CachedCharacters.objects.filter(name__icontains=query)[:3]  #Gets up to 3 suggestions
+    suggestion_list = [character.name for character in suggestions]
     return JsonResponse({'suggestions': suggestion_list})
     
