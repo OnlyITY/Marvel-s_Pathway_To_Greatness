@@ -13,6 +13,9 @@ def forum(request):
 def loginpage(request):
     return render(request, "pages/Marvel_LoginPage.html", {})
 
+def test(request):
+    return render(request, "pages/test.html", {})
+
 
 # Creates auto guess feature
 
