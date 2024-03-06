@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Users(models.Model):
@@ -51,3 +52,14 @@ class Bookmarks(models.Model):
     link = models.CharField(max_length=500)
     creationDate = models.DateTimeField()
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
+
+
+
+
+
+class Friendship(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_friends')
+    friend = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_friends_with')
+
+    class Meta:
+        unique_together = ['user', 'friend']
