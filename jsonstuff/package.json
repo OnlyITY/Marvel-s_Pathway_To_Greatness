@@ -1,0 +1,17 @@
+{
+  "name": "pathway_to_marvels_greatest",
+  "version": "1.0.0",
+  "description": "This is a college project, a work in progress web application that is planned to search for a Marvel character's appearance in a specific year inputted by the user. The results should be that it'll show all of that character's appearances and what comic they appeared in. This application should in the future be able to allow the user to either purchase the comic, should they want to. It should also allow the user to also have the ability to go into a chat forum, allowing the user to interact and talk with other fellow fans. The web application will allow the user to register an account, which will be secure.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node": "^21.6.2",
+    "socket.io": "^4.7.4"
+  }
+}
