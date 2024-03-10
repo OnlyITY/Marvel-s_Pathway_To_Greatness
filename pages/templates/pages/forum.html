@@ -39,6 +39,14 @@
             </div>
         </div>
 
+        <h1>Friends List</h1>
+
+        <ul>
+            {% for friend in friends %}
+                <li>{{ friend.friend.username }}</li>
+            {% endfor %}
+        </ul>
+
         <!-- Will install socket to have client and server side to have a chatrom-->
 </body>
 </html>
