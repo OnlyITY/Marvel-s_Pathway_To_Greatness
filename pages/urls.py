@@ -5,7 +5,7 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path("forum/", views.forum, name="forum"),
-    path("loginpage/", views.loginpage, name="loginpage"),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('search-suggestions/', views.character_name_suggestions, name = 'search_suggestions'),
     path("test/", views.test, name="test"),
     path("api/", include("api.urls")),

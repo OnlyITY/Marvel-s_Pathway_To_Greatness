@@ -113,6 +113,10 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
+AUTH_USER_MODEL = 'pages.Users'
+
+LOGIN_REDIRECT_URL = '/'
+
 USE_I18N = True
 
 USE_TZ = True

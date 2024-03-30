@@ -3,8 +3,6 @@ from api import views
 
 urlpatterns = [
     path('User/registerUser/', views.registerUser, name="registerUser"),
-    path('User/logIn/', views.logIn, name="logIn"),
-    path('User/logOut/', views.logOut, name="logOut"),
     path('Forum/createNewPost/', views.createNewPost, name="createNewPost"),
     path('Forum/viewPosts/', views.viewPosts, name="viewPosts"),
     path('Search/searchByArc/', views.searchByArc, name="searchByArc"),

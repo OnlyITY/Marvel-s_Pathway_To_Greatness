@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from pages.models import Characters
 from django.contrib.auth.decorators import login_required
-from .models import Friendship
+from .models import Friendship, Users
 
 # Create your views here.
 
@@ -12,12 +12,12 @@ def home(request):
 def forum(request):
     return render(request, "pages/forum.html", {})
 
-def loginpage(request):
-    return render(request, "pages/Marvel_LoginPage.html", {})
-
 def test(request):
     return render(request, "pages/test.html", {})
-
+    
+# Bookmark method to return pages/bookmarks.html
+def bookmark(request):
+    return render(request, "pages/bookmarks.html", {})
 
 # Creates auto guess feature
 
@@ -35,10 +35,16 @@ def friends_list(request):
 @login_required
 def add_friend(request, friend_id):
     user = request.user
-    friend = User.objects.get(id=friend_id)
+    friend = Users.objects.get(id=friend_id)
 
     if user != friend:
         Friendship.objects.get_or_create(user=user, friend=friend)
 
     return redirect('friends_list')
-    
+
+
+# Bookmark method with @login_required
+
+
+def checkout():
+    return None
