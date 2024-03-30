@@ -5,18 +5,14 @@ from django.views.decorators.csrf import csrf_exempt
 from pages.models import Bookmarks, Users
 from django.http import HttpResponseNotFound, HttpResponse, JsonResponse
 from datetime import datetime
+
+
 # Create your views here.
 
 def home(request):
     return render(request, "pages/home.html", {})
 
 def registerUser():
-    raise NotImplementedError
-
-def logIn():
-    raise NotImplementedError
-
-def logOut():
     raise NotImplementedError
 
 def createNewPost():

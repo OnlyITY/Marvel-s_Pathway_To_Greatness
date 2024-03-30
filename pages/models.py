@@ -1,14 +1,14 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+
+from Pathway_to_Marvels_Greatest import settings
+
 
 # Create your models here.
-class Users(models.Model):
-    user_name = models.CharField(max_length=255)
+class Users(AbstractUser):
     user_email = models.EmailField(max_length=255)
     user_password = models.CharField(max_length=255)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     state = models.CharField(max_length=255)
     zipcode = models.IntegerField()
@@ -39,27 +39,24 @@ class Reviews(models.Model):
             MaxValueValidator(5),
             MinValueValidator(1)
         ])
-    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     comic = models.ForeignKey(Comics, on_delete=models.CASCADE)
 
 class ForumComments(models.Model):
     time_date = models.DateTimeField()
     comment = models.TextField()
     comm_time_date = models.DateTimeField()
-    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
 class Bookmarks(models.Model):
     link = models.CharField(max_length=500)
     creationDate = models.DateTimeField()
-    user = models.ForeignKey(Users, on_delete=models.CASCADE)
-
-
-
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
 
 class Friendship(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_friends')
-    friend = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_friends_with')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user_friends')
+    friend = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user_friends_with')
 
     class Meta:
         unique_together = ['user', 'friend']
