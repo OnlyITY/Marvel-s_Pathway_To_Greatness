@@ -1,0 +1,110 @@
+<!-- In characters.html template -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="DarkMode.css"
+    <title>Marvel Characters</title>
+    
+</head>
+<body>
+<header> <button id="dark-mode-toggle">Toggle Dark Mode</button> </header>
+<h1>Marvel Characters</h1>
+
+<form method="GET" id = "search-form" action = "/search" >
+    <label for="name">Search by Name:</label>
+    <input type="text" id="search-input" name="query" placeholder="Search character...">
+    <div id="suggestions"></div>
+
+
+    <label for="year">Search by Year:</label>
+    <input type="text" id="year" name="year">
+
+    <button type="submit">Search</button>
+</form>
+
+<script>
+    const searchInput = document.getElementById('search-input');
+    const suggestionContainer = document.getElementById('suggestions');
+    //function to fetch auto suggestions
+    const fetchSuggestions = (query) => {
+        fetch('/character-name-suggestions/?query=${query}')
+        .then(response => response.json())
+        .then(data => {
+            suggestionsConatiner.innerHTML = '';
+            data.suggestions.forEach(suggestion => {
+                suggestionElement.textContent = suggestion;
+                suggestionsContainer.appendChild(suggestionElement);
+             })
+        })
+        .catch(error => console.error('Error fetching suggestions:', error));
+    };
+    //Event listener for input field
+    document.getElementById('search-form').addEventListener('submit', function(event) {
+        //if the input field is empty, does not submit
+        if (!searchInput.value.trim()) {
+            event.preventDefault();
+        }
+    });
+
+    export default function Search() {
+    const [characterData, setCharacterData] = useState(null);
+    const [comicData, setComicData] = useState(null);
+    const [characterName, setCharacterName] = useState("");
+  
+    const SearchTime = (event) => {
+      event.preventDefault();
+  
+      getCharacterData();
+    };
+  
+    const getCharacterData = () => {
+      setCharacterData(null);
+      setComicData(null);
+  
+      const timeStamp = new Date().getTime();
+      const hash = generateHash(timeStamp);
+  
+      const url = `https://gateway.marvel.com:443/v1/public/characters?apikey=${publicKey}&hash=${hash}&ts=${timeStamp}&nameStartsWith=${characterName}&limit=100`;
+  
+      fetch(url)
+        .then((response) => response.json())
+        .then((result) => {
+          setCharacterData(result.data);
+          console.log(result.data);
+        })
+        .catch(() => {
+          console.log("error while getting character data");
+        });
+    };
+  
+    const getComicData = (characterId) => {
+      window.scrollTo({ top: 0, left: 0 });
+  
+      const timeStamp = new Date().getTime();
+      const hash = generateHash(timeStamp);
+  
+      const url = `https://gateway.marvel.com:443/v1/public/characters/${characterId}/comics?apikey=${publicKey}&hash=${hash}&ts=${timeStamp}`;
+  
+      fetch(url)
+        .then((response) => response.json())
+        .then((result) => {
+          setComicData(result.data);
+          console.log(result.data);
+        })
+        .catch(() => {
+          console.log("error while getting comic data");
+        });
+    };
+
+    }
+
+src="DarkModeScript.js"
+</script>
+
+
+</body>
+</html>
+    
