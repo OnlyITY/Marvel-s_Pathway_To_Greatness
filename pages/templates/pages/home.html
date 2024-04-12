@@ -22,9 +22,15 @@
     <input type="text" id="year" name="year">
 
     <button type="submit">Search</button>
+
+</form>
+<form method="GET" id = "favorite" action="{% url '/favorites' %}">
+    {% csrf_token %}
+    <!-- Work in progress button, once summarization is finished. Button can be made according to the values of summarization.-->
 </form>
 
 <script>
+    
     const searchInput = document.getElementById('search-input');
     const suggestionContainer = document.getElementById('suggestions');
     //function to fetch auto suggestions
@@ -43,10 +49,57 @@
     //Event listener for input field
     document.getElementById('search-form').addEventListener('submit', function(event) {
         //if the input field is empty, does not submit
+        searchText = searchInput
+        fetch('/home/',{
+            method: 'POST'
+            body: JSON.stringify(searchText),
+        })
+        .then(response => response.json())
+        .then(searchText => {
+            console.log(searchInput.message)
+        })
+        .catch(error => {
+            console.error('Error', error);
+        })
+
         if (!searchInput.value.trim()) {
             event.preventDefault();
         }
     });
+
+    const picture = document.getElementById('picture-link');
+    const comicDate = document.getElementById('get-date');
+    const get_author_name = document.getElementById('get-author-name');
+    const get_comic_name = document.getElementById('get-comic-name');
+    const get_summary = document.getElementById('get-summary');
+    document.getElementById('comic').addEventListener('submit', function(event) {
+        const submitComicForm = () => {
+            const comicData = {
+                picture_link: picture,
+                date: comicDate,
+                author_name: get_author_name,
+                comic_name: get_comic_name,
+                summary: get_summary
+            };
+        
+            fetch('/add_to_favorites/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                   
+                },
+                body: JSON.stringify(comicData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.message); 
+            })
+            .catch(error => {
+                console.error('Error: not able to collect all comic data', error); 
+            });
+        };
+    });
+
 </script>
 
 
