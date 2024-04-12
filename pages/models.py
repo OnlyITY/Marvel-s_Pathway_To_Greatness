@@ -60,3 +60,7 @@ class Friendship(models.Model):
 
     class Meta:
         unique_together = ['user', 'friend']
+
+class saveSearch(models.Model):
+    searchString = models.CharField( max_length=255)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
