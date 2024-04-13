@@ -6,24 +6,16 @@
 <link rel="stylesheet" href=" {% static 'Marvel_LoginStyle.css' %}">
 <body>
 
-<h2>Pathway of Marvels Greatest Sign in</h2>
-<form action="{% url 'login' %}" method="post">
-    {% csrf_token %}
+<h2>Pathway of Marvels Greatest Sign Up</h2>
+<form action="{% url 'register' %}" method="post">
     <div class="imgcontainer">
       {% load static %}
       <img src="{% static '/Silver_Surfer.png' %}" alt="Silver Surfer" class="Silver_Surfer">
     </div>
-  
+
     <div class="container">
-        <div>{{ form.username.label_tag }}</div>
-        <div>{{ form.username }}</div>
-  
-        <div>{{ form.password.label_tag }}</div>
-        <div>{{ form.password }}</div>
-  
-      <button type="submit">Enter The Multiverse</button>
+       Thanks for Registering
     </div>
-    <div class="container"><a href="{% url 'register' %}">Create an account</a></div>
   </form>
 </body>
 </html>

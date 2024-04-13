@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from pages.models import Characters
 from django.contrib.auth.decorators import login_required
+
+from .forms import RegistrationForm
 from .models import Friendship, Users
 
 # Create your views here.
@@ -16,6 +18,7 @@ def test(request):
     return render(request, "pages/test.html", {})
     
 # Bookmark method to return pages/bookmarks.html
+@login_required
 def bookmark(request):
     return render(request, "pages/bookmarks.html", {})
 
@@ -43,6 +46,26 @@ def add_friend(request, friend_id):
     return redirect('friends_list')
 
 
+def register(request):
+    # if this is a POST request we need to process the form data
+    if request.method == "POST":
+        # create a form instance and populate it with data from the request:
+        form = RegistrationForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.save()
+
+            return HttpResponseRedirect("/accounts/thanks/")
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = RegistrationForm()
+
+    return render(request, "pages/Register_Feature.html", {"form": form})
+
+
+def thanks(request):
+    return render(request, "pages/Thanks.html")
 # Bookmark method with @login_required
 
 
