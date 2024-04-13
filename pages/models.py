@@ -8,7 +8,6 @@ from Pathway_to_Marvels_Greatest import settings
 # Create your models here.
 class Users(AbstractUser):
     user_email = models.EmailField(max_length=255)
-    user_password = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     state = models.CharField(max_length=255)
     zipcode = models.IntegerField()
@@ -63,4 +62,4 @@ class Friendship(models.Model):
 
 class saveSearch(models.Model):
     searchString = models.CharField( max_length=255)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(Users, on_delete=models.CASCADE)

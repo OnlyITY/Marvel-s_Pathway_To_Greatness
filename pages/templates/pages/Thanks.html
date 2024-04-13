@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<!-- Pathway of Marvels Greatest Login Page. -->
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{%load static%}
+<link rel="stylesheet" href=" {% static 'Marvel_LoginStyle.css' %}">
+<body>
+
+<h2>Pathway of Marvels Greatest Sign Up</h2>
+<form action="{% url 'register' %}" method="post">
+    <div class="imgcontainer">
+      {% load static %}
+      <img src="{% static '/Silver_Surfer.png' %}" alt="Silver Surfer" class="Silver_Surfer">
+    </div>
+
+    <div class="container">
+       Thanks for Registering
+    </div>
+  </form>
+</body>
+</html>
