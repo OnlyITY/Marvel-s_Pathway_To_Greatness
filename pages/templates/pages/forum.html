@@ -38,15 +38,19 @@
                 <button id="send-message">Send</button>
             </div>
         </div>
+        <!-- Hidden input to get the username just in case user.username doesn't work.-->
+        <input type="hidden" id="userId" value={{user.username}}>
+        
+        <!--To use the JS for forum-->
+        <script src="/pages/static/forumJS.js"></script>
 
         <h1>Friends List</h1>
-
         <ul>
             {% for friend in friends %}
                 <li>{{ friend.friend.username }}</li>
             {% endfor %}
         </ul>
-
+        
         <!-- Will install socket to have client and server side to have a chatrom-->
 </body>
 </html>
