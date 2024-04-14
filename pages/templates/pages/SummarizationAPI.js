@@ -38,4 +38,10 @@
             return showComicIssue;
         }
 
-getCharacterComics('spiderman')
+        function ggetCharacterInfo(name) {
+            fetch("https://gateway.marvel.com:443/v1/public/characters/%" + name )
+            .then(e => e.text())
+            
+            
+            return e;
+        }
