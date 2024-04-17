@@ -5,3 +5,5 @@ Pathway_to_Marvels_Greatest/__pycache__/
 node_modules
 venv
 env
+.venv
+.env
