@@ -1,4 +1,5 @@
 import requests
+import MarvelHashGetter
 
 class MarvelAPI:
     def __init__(self):
@@ -16,6 +17,7 @@ class MarvelAPI:
     def getCharcterInfo(self, name):
         #?name=Thor&apikey=5231bb34f7a0b26e79ef5e97430b97d6
         return self.__callapi("https://gateway.marvel.com:443/v1/public/characters/%s" % name)
+        #https://gateway.marvel.com/v1/public/characters?ts=35201529&name=Doctor%20Doom&apikey=83cba64ddb32d65ba2c813bde03c4044&hash=76801623818d7ac2534f4686fa0c13fb
         # fix link so that in case there's a two worded or more superhero, there needs to be a %20 in the space
 
     def getCharacterComics(self, name):
@@ -27,3 +29,17 @@ class MarvelAPI:
     def getComicIssue(self, issueId):
         # Change the string for getting an issue 
         return self.__callapi("comics?ts=35201529&apikey=83cba64ddb32d65ba2c813bde03c4044&hash=76801623818d7ac2534f4686fa0c13fb" %issueId)
+
+    def getCharacterInfo(name):
+        check = name.isspace()
+        if (check == True):
+            name.replace(" ", "%20")
+
+        ts, md5_hash = MarvelHashGetter.getHash()
+
+        url = f"https://gateway.marvel.com/v1/public/characters?ts={ts}&name={name}&apikey={MarvelHashGetter.pubKey}&hash={md5_hash}"
+        data = json.load(url)
+        print(data)
+
+
+getCharacterInfo("Thor")

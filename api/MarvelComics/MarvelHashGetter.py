@@ -2,11 +2,14 @@
 import hashlib
 import time
 import json
-import requests
+import request
+
+privKey = "a4aeb5fe56bc287c1e054fbeab78e4e775a28c83"
+pubKey = "5231bb34f7a0b26e79ef5e97430b97d6"
+
 
 def getHash():
-    privKey = "a4aeb5fe56bc287c1e054fbeab78e4e775a28c83"
-    pubKey = "5231bb34f7a0b26e79ef5e97430b97d6"
+    
     getMd5 = hashlib.md5()
 
     ts = str(time.time()) #Creates a time stamp
@@ -17,5 +20,5 @@ def getHash():
 
     hasht = m.hexdigest()
 
-    return ts, hasht
+    return ts_byte, hasht
 
