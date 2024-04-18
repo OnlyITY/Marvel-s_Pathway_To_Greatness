@@ -1,0 +1,73 @@
+import requests
+import hashlib
+import calendar
+import time
+
+import Config
+
+base_url = "http://gateway.marvel.com/"
+URL = "http://gateway.marvel.com/v1/public/characters"
+
+gt = time.gmtime()
+ts = calendar.timegm(gt)
+
+hash = hashlib.md5((str(ts) + Config.privKey + Config.pubKey).encode())
+
+def getCharacter(name):
+
+    query = base_url + "v1/public/characters"
+
+    PARAMSS = {
+        "apikey": Config.pubKey,
+        "ts": ts,
+        "hash" : hash.hexdigest(),
+        "name": name
+    }   
+
+    #Opens up the url using the parameters given to search for the inputted character
+    r = requests.get(url = query, params=PARAMSS)
+
+    data = r.json()
+
+    if len(data.get("data").get("results")):
+        #Searches through the data under the results
+        characterData = data.get("data").get("results")
+
+        #Gets the character's urls
+        characterURLS = characterData[0].get("urls")
+
+        #Gets character ID
+        characterID = characterData[0].get("id")
+
+        #Gets the character name
+        characterName = characterData[0].get("name")
+
+        #Gets the character description(If there is one)
+        characterDesc = characterData[0].get("description")
+
+        #Gets the character image(If there is one)
+        characterImage = characterData[0].get("thumbnail").get("path") + ".jpg"
+        print(characterName)
+        print(characterDesc)
+        print(characterImage)
+
+
+def getComics(character):
+    query = base_url + "v1/public/comics"
+
+    PARAMS = {
+        "apikey": Config.pubKey,
+        "ts": ts,
+        "hash" : hash.hexdigest(),
+        "character": character
+    }   
+
+
+    if len(data.get("data".get("results"))):
+        for i in range(len(data.get("data".get("results")))):
+            comicID = comicData[i].get("id")
+            comicTitle = comicData[i].get("title")
+
+getCharacter("Thor")
+    
+
