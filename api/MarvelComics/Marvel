@@ -27,6 +27,7 @@ def getCharacter(name):
     #Opens up the url using the parameters given to search for the inputted character
     r = requests.get(url = query, params=PARAMSS)
 
+    #Turns the requested data into a json and saved into a variable
     data = r.json()
 
     if len(data.get("data").get("results")):
@@ -46,28 +47,49 @@ def getCharacter(name):
         characterDesc = characterData[0].get("description")
 
         #Gets the character image(If there is one)
-        characterImage = characterData[0].get("thumbnail").get("path") + ".jpg"
+        imageExtension = characterData[0].get("thumbnail").get("extension")
+        characterImage = characterData[0].get("thumbnail").get("path") + "." + imageExtension
         print(characterName)
         print(characterDesc)
         print(characterImage)
 
-
-def getComics(character):
+#Add more variables into the function to access the startYear search and any other variables that are put into the PARAMS in the future
+def getComics(character, **args):
     query = base_url + "v1/public/comics"
 
     PARAMS = {
         "apikey": Config.pubKey,
-        "ts": ts,
+        "ts": ts, 
         "hash" : hash.hexdigest(),
-        "character": character
+        "characters": character,
+        "startYear": args,
+
     }   
 
+    r = requests.get(url = query, params=PARAMS)
 
-    if len(data.get("data".get("results"))):
-        for i in range(len(data.get("data".get("results")))):
+    data = r.json()
+
+    if len(data.get("data").get("results")):
+        #Makes comicData equal to the results section
+        comicData = data.get("data").get("results")
+
+        #Goes through the results length
+        for i in range(len(comicData)):
+
+            #Gets ComicID equal to the range value (Should get the comicID)
             comicID = comicData[i].get("id")
+            print(comicID)
+            #Gets the comic title
             comicTitle = comicData[i].get("title")
+            #print(comicTitle)
 
-getCharacter("Thor")
-    
+            #Gets the comic year (This doesn't work because the place it searches doesn't give the comic year
+            comicYear = comicData[i].get("Year")
+            
+#This will test the function getCharacter()
+#getCharacter("Thor")
+
+#This one tests the function getComics()
+getComics(1009368, 2002)
 
