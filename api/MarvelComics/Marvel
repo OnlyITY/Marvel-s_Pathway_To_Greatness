@@ -54,7 +54,7 @@ def getCharacter(name):
         print(characterImage)
 
 #Add more variables into the function to access the startYear search and any other variables that are put into the PARAMS in the future
-def getComics(character, **args):
+def getComics(character, *args):
     query = base_url + "v1/public/comics"
 
     PARAMS = {
@@ -88,8 +88,8 @@ def getComics(character, **args):
             comicYear = comicData[i].get("Year")
             
 #This will test the function getCharacter()
-#getCharacter("Thor")
+#getCharacter("Doctor Doom")
 
 #This one tests the function getComics()
-getComics(1009368, 2002)
+getComics(1009368, 1999)
 
