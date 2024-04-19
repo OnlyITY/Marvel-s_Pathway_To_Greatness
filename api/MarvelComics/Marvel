@@ -31,6 +31,7 @@ def getCharacter(name):
     data = r.json()
 
     if len(data.get("data").get("results")):
+        noImage = False
         #Searches through the data under the results
         characterData = data.get("data").get("results")
 
@@ -44,14 +45,24 @@ def getCharacter(name):
         characterName = characterData[0].get("name")
 
         #Gets the character description(If there is one)
-        characterDesc = characterData[0].get("description")
+        if (characterData[0].get("description") == ""):
+            print("This character has no description sadly.")
+            noImage = True
+        else:
+            characterDesc = characterData[0].get("description")
+            print(characterDesc)
 
         #Gets the character image(If there is one)
         imageExtension = characterData[0].get("thumbnail").get("extension")
         characterImage = characterData[0].get("thumbnail").get("path") + "." + imageExtension
-        print(characterName)
-        print(characterDesc)
+
+        print(characterName)        
         print(characterImage)
+
+        if(noImage == True):
+            return characterName, characterImage, characterID
+        else:
+            return characterName, characterImage, characterDesc, characterID
 
 #Add more variables into the function to access the startYear search and any other variables that are put into the PARAMS in the future
 def getComics(character, *args):
@@ -86,7 +97,18 @@ def getComics(character, *args):
 
             #Gets the comic year (This doesn't work because the place it searches doesn't give the comic year
             comicYear = comicData[i].get("Year")
-            
+
+            #Gets comic book authors/writers
+            if comicData[i].get("creators").get("available") == 0:
+                comicAuthors = "This comic has an unknown writer/author"
+            else:
+                comicAuthors = comicData[i].get("creators").get("items")
+
+            #Gets comic book image
+            imageExtension = comicData[0].get("thumbnail").get("extension")
+            comicImage = comicData[0].get("thumbnail").get("path") + "." + imageExtension
+
+            print(comicAuthors, "\n", comicImage)
 #This will test the function getCharacter()
 #getCharacter("Doctor Doom")
 
