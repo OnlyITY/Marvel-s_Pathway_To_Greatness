@@ -26,6 +26,7 @@ class Comics(models.Model):
     linkForPurchase = models.CharField(max_length=500)
     characters = models.ManyToManyField(Characters, through="ComicCharacters")
     comicIMG = models.TextField(default="image")
+    comicID = models.IntegerField(default=1)
 
 class ComicCharacters(models.Model):
     character = models.ForeignKey(Characters, on_delete=models.CASCADE)
