@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponseRedirect
 
 from api.MarvelComics.marvelAPI import MarvelAPI
+from api.MarvelComics.Marvel import Marvel
 from pages.models import Characters
 from django.contrib.auth.decorators import login_required
 
@@ -32,13 +33,24 @@ def search(request):
         year = str(request.POST.get('year', ''))
 
         if characterName != '' and year != '':
-            marvelApi = MarvelAPI()
-            data = marvelApi.getCharcterInfo(characterName)
-            return render(request, "pages/searchresults.html", {"data": data})
+            #marvelApi = MarvelAPI()
+            #data = marvelApi.getCharcterInfo(characterName)
+            #return render(request, "pages/searchresults.html", {"data": data})
+            myMarvel = Marvel()
+            data = myMarvel.getCharacter(characterName)
         if characterName != '':
-            marvelApi = MarvelAPI()
-            data = marvelApi.getCharcterInfo(characterName)
-            return render(request, "pages/searchresults.html", {"data": data})
+            #marvelApi = MarvelAPI()
+            #data = marvelApi.getCharcterInfo(characterName)
+            myMarvel = Marvel()
+            name, image, id, description = myMarvel.getCharacter(characterName)
+            myMarvel.getComics(id)
+            PARAMS = {
+                'name': name,
+                'image': image,
+                'id': id,
+                'description': description
+            }
+            return render(request, "pages/searchresults.html", PARAMS)
         else:
             marvelApi = MarvelAPI()
             data = marvelApi.getCharcters()

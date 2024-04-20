@@ -3,7 +3,7 @@ import hashlib
 import calendar
 import time
 
-from django.db.models import Exists
+
 from api.MarvelComics import Config
 from pages.models import Characters, Comics
 
@@ -88,6 +88,16 @@ class Marvel():
 
             #Goes through the results length
             for i in range(len(comicData)):
+               
+                charUrl = comicData[0].get("urls")
+
+                buyLink = ""
+
+                for url in charUrl:
+                    if url['type'] == 'purchase':
+                        print("yes")
+                        buyLink = url['url']                
+                        print(buyLink)
 
                 #Gets ComicID equal to the range value (Should get the comicID)
                 comicID = comicData[i].get("id")
@@ -106,16 +116,16 @@ class Marvel():
                 if comicData[i].get("creators").get("available") == 0:
                     comicAuthors = "This comic has an unknown writer/author"
                 else:
-                    authors = comicData[i].get("creators").get("items")
+                    authors = comicData[0].get("creators").get("items")
                     comicAuthors = [x['name'] for x in authors]
-                    print(comicAuthors)
+                    
 
                 #Gets comic book image
                 imageExtension = comicData[0].get("thumbnail").get("extension")
                 comicImage = comicData[0].get("thumbnail").get("path") + "." + imageExtension
 
-                print(comicAuthors, "\n", comicImage)
-                #c = Comics(title= comicTitle, publicationDate=comicDate, Summary=comicDesc )
+                print(comicAuthors, "\n", comicImage + "\n" + buyLink)
+                #c = Comics(title= comicTitle, publicationDate=comicDate, Summary=comicDesc, linkforPurchase= )
     #This will test the function getCharacter()
     #getCharacter("Thor")
 
