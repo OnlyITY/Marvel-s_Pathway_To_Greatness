@@ -15,7 +15,9 @@ class Users(AbstractUser):
 
 class Characters(models.Model):
     name = models.CharField(max_length=255)
-
+    characterId = models.IntegerField(default=1)
+    characterImage = models.TextField(default="Image")
+    characterDescription = models.TextField(default="Description")
 
 class Comics(models.Model):
     title = models.CharField(max_length=255)

@@ -3,7 +3,8 @@ import hashlib
 import calendar
 import time
 
-import Config
+from api.MarvelComics import Config
+from pages.models import Characters, Comics
 
 base_url = "http://gateway.marvel.com/"
 URL = "http://gateway.marvel.com/v1/public/characters"
@@ -16,7 +17,6 @@ hash = hashlib.md5((str(ts) + Config.privKey + Config.pubKey).encode())
 def getCharacter(name):
 
     query = base_url + "v1/public/characters"
-
     PARAMSS = {
         "apikey": Config.pubKey,
         "ts": ts,
@@ -40,7 +40,6 @@ def getCharacter(name):
 
         #Gets character ID
         characterID = characterData[0].get("id")
-
         #Gets the character name
         characterName = characterData[0].get("name")
 
@@ -56,6 +55,8 @@ def getCharacter(name):
         imageExtension = characterData[0].get("thumbnail").get("extension")
         characterImage = characterData[0].get("thumbnail").get("path") + "." + imageExtension
 
+        c = Characters(name=characterName, characterId=characterID, characterImage=characterImage, characterDescription=characterDesc)
+        c.save()
         print(characterName)        
         print(characterImage)
 
@@ -110,8 +111,8 @@ def getComics(character, *args):
 
             print(comicAuthors, "\n", comicImage)
 #This will test the function getCharacter()
-#getCharacter("Doctor Doom")
+getCharacter("Thor")
 
 #This one tests the function getComics()
-getComics(1009368, 1999)
+#getComics(1009368, 1999)
 
