@@ -41,11 +41,10 @@ class Marvel():
             characterID = characterData[0].get("id")
             #Gets the character name
             characterName = characterData[0].get("name")
-
+            characterDesc = ""
             #Gets the character description(If there is one)
             if (characterData[0].get("description") == ""):
-                print("This character has no description sadly.")
-                noImage = True
+                characterDesc = "This character has no description sadly."
             else:
                 characterDesc = characterData[0].get("description")
                 print(characterDesc)
@@ -54,7 +53,7 @@ class Marvel():
             imageExtension = characterData[0].get("thumbnail").get("extension")
             characterImage = characterData[0].get("thumbnail").get("path") + "." + imageExtension
         
-            
+            #This checks for if the character name is already in the database, if it is it does nothing, if it doesn't it'll save that character into the database.    
             x = Characters.objects.filter(name=characterName).exists()
             if (x):
                 print("This character is already in the database")
@@ -64,10 +63,7 @@ class Marvel():
             print(characterName)        
             print(characterImage)
 
-            if(noImage == True):
-                return characterName, characterImage, characterID
-            else:
-                return characterName, characterImage, characterID, characterDesc
+        return characterName, characterImage, characterID, characterDesc
 
     #Add more variables into the function to access the startYear search and any other variables that are put into the PARAMS in the future
     def getComics(self, character, *args):
@@ -104,22 +100,25 @@ class Marvel():
                 comicYear = comicData[i].get("Year")
 
                 #Gets comic description for that comic
-                comicDesc = comicData[i].get("textObject").get("text")
+                comicDesc = comicData[i].get("description")
+                print(comicDesc)
                 #Gets comic book authors/writers
                 if comicData[i].get("creators").get("available") == 0:
                     comicAuthors = "This comic has an unknown writer/author"
                 else:
-                    comicAuthors = comicData[i].get("creators").get("items")
+                    authors = comicData[i].get("creators").get("items")
+                    comicAuthors = [x['name'] for x in authors]
+                    print(comicAuthors)
 
                 #Gets comic book image
                 imageExtension = comicData[0].get("thumbnail").get("extension")
                 comicImage = comicData[0].get("thumbnail").get("path") + "." + imageExtension
 
                 print(comicAuthors, "\n", comicImage)
-                c = Comics(title= comicTitle, publicationDate=comicDate, Summary=comicDesc )
+                #c = Comics(title= comicTitle, publicationDate=comicDate, Summary=comicDesc )
     #This will test the function getCharacter()
     #getCharacter("Thor")
 
     #This one tests the function getComics()
-    #getComics(1009368, 1999)
+    #getComics(1009351, 1999)
 
