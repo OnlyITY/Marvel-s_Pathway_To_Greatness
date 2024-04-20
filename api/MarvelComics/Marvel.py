@@ -85,13 +85,11 @@ class Marvel():
         if len(data.get("data").get("results")):
             #Makes comicData equal to the results section
             comicData = data.get("data").get("results")
-
+            buyLink = ""
             #Goes through the results length
             for i in range(len(comicData)):
                
                 charUrl = comicData[0].get("urls")
-
-                buyLink = ""
 
                 for url in charUrl:
                     if url['type'] == 'purchase':
@@ -116,7 +114,7 @@ class Marvel():
                 if comicData[i].get("creators").get("available") == 0:
                     comicAuthors = "This comic has an unknown writer/author"
                 else:
-                    authors = comicData[0].get("creators").get("items")
+                    authors = comicData[i].get("creators").get("items")
                     comicAuthors = [x['name'] for x in authors]
                     
 
