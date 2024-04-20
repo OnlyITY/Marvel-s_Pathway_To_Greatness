@@ -9,6 +9,7 @@ urlpatterns = [
     path('accounts/register/', views.register, name='register'),
     path('accounts/thanks/', views.thanks, name='thanks'),
     path('accounts/bookmarks/', views.bookmark, name='bookmark'),
+    path('search/', views.search, name='search'),
     path('search-suggestions/', views.character_name_suggestions, name = 'search_suggestions'),
     path("test/", views.test, name="test"),
     path("api/", include("api.urls")),

@@ -23,9 +23,10 @@ Hi {{ user.username }}!
 {% endif %}
 {% endblock %}
 
-<form method="GET" id = "search-form" action = "/search" >
+<form method="POST" id = "search-form" action = "/search/" >
+    {% csrf_token %}
     <label for="name">Search by Name:</label>
-    <input type="text" id="search-input" name="query" placeholder="Search character...">
+    <input type="text" id="search-input" name="characterName" placeholder="Search character...">
     <div id="suggestions"></div>
 
 
@@ -35,6 +36,7 @@ Hi {{ user.username }}!
     <button type="submit">Search</button>
 
 </form>
+
 <!--<form method="GET" id = "favorite" action="">
 
     Work in progress button, once summarization is finished. Button can be made according to the values of summarization.
