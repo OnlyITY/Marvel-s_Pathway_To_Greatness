@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponseRedirect
+
+from api.MarvelComics.marvelAPI import MarvelAPI
 from pages.models import Characters
 from django.contrib.auth.decorators import login_required
 
@@ -23,6 +25,28 @@ def bookmark(request):
     return render(request, "pages/bookmarks.html", {})
 
 # Creates auto guess feature
+
+def search(request):
+    if request.method == "POST":
+        characterName = str(request.POST.get('characterName', ''))
+        year = str(request.POST.get('year', ''))
+
+        if characterName != '' and year != '':
+            marvelApi = MarvelAPI()
+            data = marvelApi.getCharcterInfo(characterName)
+            return render(request, "pages/searchresults.html", {"data": data})
+        if characterName != '':
+            marvelApi = MarvelAPI()
+            data = marvelApi.getCharcterInfo(characterName)
+            return render(request, "pages/searchresults.html", {"data": data})
+        else:
+            marvelApi = MarvelAPI()
+            data = marvelApi.getCharcters()
+            return render(request, "pages/searchresults.html", {"data": data})
+    else:
+        return render(request, "pages/home.html")
+
+
 
 def character_name_suggestions(request):
     query = request.GET.get('query', '')
