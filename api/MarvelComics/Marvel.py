@@ -94,7 +94,6 @@ class Marvel():
                 for url in charUrl:
                     if url['type'] == 'purchase':
                         buyLink = url['url']                
-                        print(buyLink)
 
                 #Gets ComicID equal to the range value (Should get the comicID)
                 comicIDE = comicData[i].get("id")
@@ -102,21 +101,19 @@ class Marvel():
 
                 #Gets the comic title
                 comicTitle = comicData[i].get("title")
-                #print(comicTitle)
+                #print(comicTitle)s
 
-                year = []
-                date = 0
-                getYears = comicTitle.split()
-                for u in getYears:
-                    if u.isnumeric():
-                        date += int(u)
-                        if len(date) == 3:
-                            year.append(date)
-                            date = 0
-                print(year)
-
-                #Gets the comic year (This doesn't work because the place it searches doesn't give the comic year
-                comicYear = comicData[i].get("Year")
+                comicYears = ""
+                #Should get the comic date from the title
+                for m in comicTitle:
+                    if m.isdigit():
+                        if (len(comicYears)) == 4:
+                            pass
+                        else:
+                            comicYears += m
+                
+                newcomicYears = int(comicYears)
+                print(newcomicYears)
 
                 #Gets comic description for that comic
                 comicDesc = comicData[i].get("description")
@@ -134,12 +131,12 @@ class Marvel():
                 comicImage = comicData[0].get("thumbnail").get("path") + "." + imageExtension
 
                 print(comicAuthors, "\n", comicImage + "\n" + buyLink)
-                #x = Characters.objects.filter(comicID=comicIDE).exists()
-                #if (x):
-                    #print("This comic is already in the database!")
-                #else:
-                    #c = Comics(title= comicTitle, publicationDate=comicDate, Summary=comicDesc, linkforPurchase=buyLink, comicIMG=comicImage, comicID=comicIDE )
-                    #c.save()
+                x = Comics.objects.filter(comicID=comicIDE).exists()
+                if (x):
+                    print("This comic is already in the database!")
+                else:
+                    c = Comics(title= comicTitle, summary=comicDesc, linkForPurchase=buyLink, comicIMG=comicImage, comicID=comicIDE, comicYear = newcomicYears)
+                    c.save()
     #This will test the function getCharacter()
     #getCharacter("Thor")
 

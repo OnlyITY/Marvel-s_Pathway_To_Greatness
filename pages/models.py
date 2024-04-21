@@ -21,7 +21,7 @@ class Characters(models.Model):
 
 class Comics(models.Model):
     title = models.CharField(max_length=255)
-    publicationDate = models.DateField()
+    comicYear = models.IntegerField(default=1, null=True, blank=True)
     summary = models.TextField()
     linkForPurchase = models.CharField(max_length=500)
     characters = models.ManyToManyField(Characters, through="ComicCharacters")
