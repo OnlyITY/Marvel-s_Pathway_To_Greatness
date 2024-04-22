@@ -5,6 +5,19 @@
     <title>Search Results</title>
 </head>
 <body>
-    {{data}}
+    {% block content %}
+        <h1>{{name}}</h1>
+        <img src={{image}} width="300" height="300">
+        <p>{{description}} </p>
+
+        <!--{% for x in comInfo%}
+            <img src={{x.title}}>
+            {{x.comicYear}}
+            {{x.summary}}
+        {% endfor %}
+    {% endblock content %}  -->
+
+        
+
 </body>
 </html>

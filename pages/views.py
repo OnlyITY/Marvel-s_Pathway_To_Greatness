@@ -3,7 +3,7 @@ from django.http import JsonResponse, HttpResponseRedirect
 
 from api.MarvelComics.marvelAPI import MarvelAPI
 from api.MarvelComics.Marvel import Marvel
-from pages.models import Characters
+from pages.models import Characters, Comics
 from django.contrib.auth.decorators import login_required
 
 from .forms import RegistrationForm
@@ -41,16 +41,21 @@ def search(request):
         if characterName != '':
             #marvelApi = MarvelAPI()
             #data = marvelApi.getCharcterInfo(characterName)
-            myMarvel = Marvel()
+            myMarvel = Marvel()            
+            comInfo = Comics.objects.all()
             name, image, id, description = myMarvel.getCharacter(characterName)
+            #getName = Characters.objects()
+
             myMarvel.getComics(id)
             PARAMS = {
                 'name': name,
                 'image': image,
                 'id': id,
-                'description': description
+                'description': description,
+                'comInfo': comInfo
             }
             return render(request, "pages/searchresults.html", PARAMS)
+            #return render(request, "pages/searchresults.html", {"data": data})
         else:
             marvelApi = MarvelAPI()
             data = marvelApi.getCharcters()

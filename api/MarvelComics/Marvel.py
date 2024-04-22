@@ -89,7 +89,7 @@ class Marvel():
             #Goes through the results length
             for i in range(len(comicData)):
                
-               #Searches through urls to get the link for purchasing the comic
+               #Searches through urls to get the link for purchasing the comic               
                 charUrl = comicData[i].get("urls")
                 for url in charUrl:
                     if url['type'] == 'purchase':
@@ -115,8 +115,12 @@ class Marvel():
                 newcomicYears = int(comicYears)
                 print(newcomicYears)
 
+                comicDesc = "Haha"
                 #Gets comic description for that comic
-                comicDesc = comicData[i].get("description")
+                if (comicData[i].get("description") == ""):
+                    comicDesc = "This comic has no description"
+                else:
+                    comicDesc = comicData[i].get("description")
                 print(comicDesc)
                 #Gets comic book authors/writers
                 if comicData[i].get("creators").get("available") == 0:
