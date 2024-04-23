@@ -1,0 +1,10 @@
+body {
+    background-color: red;
+}
+h1 {color:  whitesmoke; text-align: center;
+}
+.image {display: block;
+margin-left: auto;
+margin-right: auto;
+width: 25%;
+}
