@@ -1,13 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Search Results</title>
+    <link rel="stylesheet" href = "{% static 'searchResults.css' %}">
 </head>
 <body>
     {% block content %}
         <h1>{{name}}</h1>
-        <img src={{image}} width="300" height="300">
+        <img src={{image}} width="300" height="300" class = 'image'>
         <p>{{description}} </p>
 
         <!--{% for x in comInfo%}
