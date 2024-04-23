@@ -8,9 +8,14 @@
 </head>
 <body>
     {% block content %}
+        <div name="Character"> 
         <h1>{{name}}</h1>
-        <img src={{image}} width="300" height="300" class = 'image'>
-        <p>{{description}} </p>
+        <img src={{image}} class = 'image'>
+        </div>
+
+        <div name="describe">
+           <p>  {{description}} </p>
+        </div>
 
         <!--{% for x in comInfo%}
             <img src={{x.title}}>

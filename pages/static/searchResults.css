@@ -1,10 +1,31 @@
-body {
-    background-color: red;
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-image: url('/static/dual-colored-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
-h1 {color:  whitesmoke; text-align: center;
+
+h1 {color:  whitesmoke; text-align: left;
 }
+
+.describe {
+    text-align: center;
+}
+
 .image {display: block;
-margin-left: auto;
-margin-right: auto;
-width: 25%;
+width: 250px;
+height: 250px;
+top: 0;
+left: 0;
+width: 200px; /* Adjust as needed */
+padding: 20px; /* Adjust as needed */
+background-color: hwb(81 4% 9%); /* Example background color */
+}
+
+h1, .image{
+    background-color: tan;
+    box-sizing: content-box;
 }
