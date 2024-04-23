@@ -3,25 +3,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marvel Characters</title>
+    <link rel="stylesheet" href = "{% static 'home.css' %}">
 </head>
 <body>
 
 <h1>Marvel Characters</h1>
+<div class="login">
 {% block content %}
-{% if user.is_authenticated %}
-Hi {{ user.username }}!
-<form action="{% url 'logout' %}" method="post">
-  {% csrf_token %}
-  <button type="submit">Log Out</button>
-</form>
-{% else %}
-<p>You are not logged in</p>
-<a href="{% url 'login' %}">Log In</a>
-{% endif %}
-{% endblock %}
+    {% if user.is_authenticated %}
+        Hi {{ user.username }}!
+        <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Log Out</button>
+        </form>
+    {% else %}
+        <p>You are not logged in</p>
+        <a href="{% url 'login' %}">Log In</a>
+    {% endif %}
+    {% endblock %}
+</div>
 
 <form method="POST" id = "search-form" action = "/search/" >
     {% csrf_token %}
