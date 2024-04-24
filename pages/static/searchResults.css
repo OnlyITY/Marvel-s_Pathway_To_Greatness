@@ -8,12 +8,33 @@ body, html {
     background-position: center;
 }
 
-h1 {color:  whitesmoke; text-align: left;
+h1 {color:  whitesmoke; 
+    text-align: left;
+    font-family: fantasy;
+    
+   
+
 }
 
 .describe {
-    text-align: center;
+    text-align: left;
+    /* margin: auto; */
+    max-width: 600px;
+    font-family: fantasy;
+    color: whitesmoke
+   
+
 }
+.button {
+    background-color: red;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    }
+  
 
 .image {display: block;
 width: 250px;

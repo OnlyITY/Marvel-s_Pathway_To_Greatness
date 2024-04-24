@@ -13,7 +13,7 @@
         <img src={{image}} class = 'image'>
         </div>
 
-        <div name="describe">
+        <div name="describe" class ="describe">
            <p>  {{description}} </p>
         </div>
 
@@ -23,8 +23,10 @@
             {{x.summary}}
         {% endfor %}
     {% endblock content %}  -->
-
-        
+   
+    <a href = "{% url 'search' %}">
+        <button class = "button">Return to search</button>
+    <a/>
 
 </body>
 </html>
