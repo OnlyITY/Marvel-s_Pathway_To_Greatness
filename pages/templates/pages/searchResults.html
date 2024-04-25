@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>Search Results</title>
     <link rel="stylesheet" href = "{% static 'searchResults.css' %}">
+
+    
 </head>
 <body>
     {% block content %}
@@ -13,15 +15,37 @@
         <img src={{image}} class = 'image'>
         </div>
 
+
         <div name="describe" class ="describe">
            <p>  {{description}} </p>
         </div>
+        <!-- displays comics -->
+        <div name = "comInfo">
+        <h1>Comics</h1>
+        <ul>
+            {% for comic in comInfo %}
+            <li>
+                <h4>{{ comic.title }}</h4>
+                {% if comic.thumbnail %}
+                <img src="{{ comic.thumbnail }}" alt="{{ comic.title }}">
+                {% endif %}
+                {% if comic.summary %}
+                <p>{{ comic.summary }}</p>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        </div>
+  
+      
+       
+      
 
-        <!--{% for x in comInfo%}
+        <!-- <{% for x in comInfo %}>
             <img src={{x.title}}>
             {{x.comicYear}}
             {{x.summary}}
-        {% endfor %}
+        {% endfor %} -->
     {% endblock content %}  -->
    
     <a href = "{% url 'search' %}">
