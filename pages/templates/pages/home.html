@@ -68,7 +68,7 @@
         //if the input field is empty, does not submit
         searchText = searchInput
         fetch('/home/',{
-            method: 'POST'
+            method: 'POST',
             body: JSON.stringify(searchText),
         })
         .then(response => response.json())

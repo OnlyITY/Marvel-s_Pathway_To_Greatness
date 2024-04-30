@@ -17,5 +17,8 @@
        Thanks for Registering
     </div>
   </form>
+  <form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" >Back To Login</button>
 </body>
 </html>
