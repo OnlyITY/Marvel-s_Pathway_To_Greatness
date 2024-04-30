@@ -16,6 +16,9 @@
     <div class="container">
        Thanks for Registering
     </div>
+    <a href ="{% url 'search' %}">
+      <button class = 'Start your search'>Start your search</button>
+    </a>
   </form>
   <form action="{% url 'login' %}" method="post">
   {% csrf_token %}
