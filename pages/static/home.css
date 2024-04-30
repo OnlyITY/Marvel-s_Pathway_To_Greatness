@@ -37,3 +37,8 @@ form {
     align-self: center; /* Center the form horizontally */
     background: linear-gradient(to right, #f7141d, #0274be); /* Gradient background from light red to light blue */
 }
+.forum { color: whitesmoke;
+        text-align: right;
+
+}
+    
