@@ -16,4 +16,5 @@ urlpatterns = [
     path('friends/', views.friends_list, name='friends_list'),
     path('add-friend/<int:friend_id>/', views.add_friend, name='add_friend'),
     path("checkout/", views.checkout, name="checkout"),
+
 ]
