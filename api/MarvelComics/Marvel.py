@@ -133,8 +133,8 @@ class Marvel():
                     
 
                 #Gets comic book image
-                imageExtension = comicData[0].get("thumbnail").get("extension")
-                comicImage = comicData[0].get("thumbnail").get("path") + "." + imageExtension
+                imageExtension = comicData[i].get("thumbnail").get("extension")
+                comicImage = comicData[i].get("thumbnail").get("path") + "." + imageExtension
                 
                 x = Comics.objects.filter(comicID=comicIDE).exists()
                 if (x):
