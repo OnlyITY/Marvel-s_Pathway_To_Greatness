@@ -24,7 +24,7 @@ class Comics(models.Model):
     comicYear = models.IntegerField(default=1, null=True, blank=True)
     summary = models.TextField()
     linkForPurchase = models.CharField(max_length=500)
-    characters = models.ManyToManyField(Characters, through="ComicCharacters")
+    characters = models.ManyToManyField(Characters, through=u"ComicCharacters", related_name=u"CharComic")
     comicIMG = models.TextField(default="image")
     comicID = models.IntegerField(default=1)
 

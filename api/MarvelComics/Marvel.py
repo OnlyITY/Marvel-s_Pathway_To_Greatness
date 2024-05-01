@@ -2,7 +2,7 @@ import requests
 import hashlib
 import calendar
 import time
-
+import json
 
 from api.MarvelComics import Config
 from pages.models import Characters, Comics
@@ -47,7 +47,6 @@ class Marvel():
                 characterDesc = "This character has no description sadly."
             else:
                 characterDesc = characterData[0].get("description")
-                print(characterDesc)
 
             #Gets the character image(If there is one)
             imageExtension = characterData[0].get("thumbnail").get("extension")
@@ -55,15 +54,16 @@ class Marvel():
         
             #This checks for if the character name is already in the database, if it is it does nothing, if it doesn't it'll save that character into the database.    
             x = Characters.objects.filter(name=characterName).exists()
+            c = Characters(id=characterID, name=characterName, characterId=characterID, characterImage=characterImage, characterDescription=characterDesc)
+
             if (x):
                 print("This character is already in the database")
-            else:
-                c = Characters(name=characterName, characterId=characterID, characterImage=characterImage, characterDescription=characterDesc)
+            else:                
                 c.save()
-            print(characterName)        
-            print(characterImage)
+                
+            
 
-        return characterName, characterImage, characterID, characterDesc
+        return characterName, characterImage, characterID, characterDesc, c
 
     #Add more variables into the function to access the startYear search and any other variables that are put into the PARAMS in the future
     def getComics(self, character, *args):
@@ -85,6 +85,7 @@ class Marvel():
         if len(data.get("data").get("results")):
             #Makes comicData equal to the results section
             comicData = data.get("data").get("results")
+    
             buyLink = ""
             #Goes through the results length
             for i in range(len(comicData)):
@@ -97,7 +98,6 @@ class Marvel():
 
                 #Gets ComicID equal to the range value (Should get the comicID)
                 comicIDE = comicData[i].get("id")
-                print(comicIDE)
 
                 #Gets the comic title
                 comicTitle = comicData[i].get("title")
@@ -112,8 +112,11 @@ class Marvel():
                         else:
                             comicYears += m
                 
-                newcomicYears = int(comicYears)
-                print(newcomicYears)
+                if comicYears == "":
+                    newcomicYears = 0
+                else:
+                    newcomicYears = int(comicYears)
+        
 
                 comicDesc = "Haha"
                 #Gets comic description for that comic
@@ -121,7 +124,6 @@ class Marvel():
                     comicDesc = "This comic has no description"
                 else:
                     comicDesc = comicData[i].get("description")
-                print(comicDesc)
                 #Gets comic book authors/writers
                 if comicData[i].get("creators").get("available") == 0:
                     comicAuthors = "This comic has an unknown writer/author"
@@ -133,15 +135,20 @@ class Marvel():
                 #Gets comic book image
                 imageExtension = comicData[0].get("thumbnail").get("extension")
                 comicImage = comicData[0].get("thumbnail").get("path") + "." + imageExtension
-
-                print(comicAuthors, "\n", comicImage + "\n" + buyLink)
+                
                 x = Comics.objects.filter(comicID=comicIDE).exists()
+                p = Characters.objects.filter(characterId = character).values()
                 if (x):
                     print("This comic is already in the database!")
+                    break
                 else:
                     c = Comics(title= comicTitle, summary=comicDesc, linkForPurchase=buyLink, comicIMG=comicImage, comicID=comicIDE, comicYear = newcomicYears)
                     c.save()
+                    c.characters.add(character)
+                    print(c.characters.all())
+
     #This will test the function getCharacter()
+
     #getCharacter("Thor")
 
     #This one tests the function getComics()
