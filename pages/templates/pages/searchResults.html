@@ -15,7 +15,6 @@
         <img src={{image}} class = 'image'>
         </div>
 
-
         <div name="describe" class ="describe">
            <p>  {{description}} </p>
         </div>
@@ -24,10 +23,10 @@
         <h1>Comics</h1>
         <ul>
             {% for comic in comInfo %}
-            <li>
+            <li>                
                 <h4>{{ comic.title }}</h4>
-                {% if comic.thumbnail %}
-                <img src="{{ comic.thumbnail }}" alt="{{ comic.title }}">
+                {% if comic.comicIMG %}
+                <img src="{{ comic.comicIMG}}" alt="{{ comic.title }}">
                 {% endif %}
                 {% if comic.summary %}
                 <p>{{ comic.summary }}</p>
