@@ -39,14 +39,28 @@ def search(request):
             #return render(request, "pages/searchresults.html", {"data": data})
             myMarvel = Marvel()
             data = myMarvel.getCharacter(characterName)
+            name, image, charId, description, c = myMarvel.getCharacter(characterName)
+            myMarvel.getComics(charId, c, year)
+            comInfo =  Comics.objects.filter(characters_id = charId)
+
+            PARAMS = {
+                'name': name,
+                'image': image,
+                'id': charId,
+                'description': description,
+                'comInfo': comInfo,
+            }
+            return render(request, "pages/searchresults.html", PARAMS)
+
         if characterName != '':
             #marvelApi = MarvelAPI()
             #data = marvelApi.getCharcterInfo(characterName)         
             myMarvel = Marvel()
             name, image, charId, description, c = myMarvel.getCharacter(characterName)
-            comInfo =  Comics.objects.filter(characters_id = charId)
+            
             #getName = Characters.objects()
-            a = myMarvel.getComics(charId, instance=c)
+            myMarvel.getComics(charId, instance=c)
+            comInfo =  Comics.objects.filter(characters_id = charId)
 
             PARAMS = {
                 'name': name,
