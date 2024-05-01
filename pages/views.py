@@ -28,6 +28,7 @@ def bookmark(request):
 # Creates auto guess feature
 
 def search(request):
+    
     if request.method == "POST":
         characterName = str(request.POST.get('characterName', ''))
         year = str(request.POST.get('year', ''))
