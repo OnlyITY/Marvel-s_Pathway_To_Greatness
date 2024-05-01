@@ -41,7 +41,7 @@ def search(request):
             data = myMarvel.getCharacter(characterName)
             name, image, charId, description, c = myMarvel.getCharacter(characterName)
             myMarvel.getComics(charId, c, year)
-            comInfo =  Comics.objects.filter(characters_id = charId)
+            comInfo =  Comics.objects.filter(characters_id = charId).filter(comicYear = year)
 
             PARAMS = {
                 'name': name,
