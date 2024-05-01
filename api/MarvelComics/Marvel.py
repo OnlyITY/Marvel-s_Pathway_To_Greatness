@@ -66,7 +66,7 @@ class Marvel():
         return characterName, characterImage, characterID, characterDesc, c
 
     #Add more variables into the function to access the startYear search and any other variables that are put into the PARAMS in the future
-    def getComics(self, character, *args):
+    def getComics(self, character, instance, *args):
         query = base_url + "v1/public/comics"
 
         PARAMS = {
@@ -137,15 +137,13 @@ class Marvel():
                 comicImage = comicData[0].get("thumbnail").get("path") + "." + imageExtension
                 
                 x = Comics.objects.filter(comicID=comicIDE).exists()
-                p = Characters.objects.filter(characterId = character).values()
                 if (x):
                     print("This comic is already in the database!")
-                    break
                 else:
-                    c = Comics(title= comicTitle, summary=comicDesc, linkForPurchase=buyLink, comicIMG=comicImage, comicID=comicIDE, comicYear = newcomicYears)
-                    c.save()
-                    c.characters.add(character)
-                    print(c.characters.all())
+                    Comics.objects.create(
+                        title= comicTitle, summary=comicDesc, linkForPurchase=buyLink, comicIMG=comicImage, comicID=comicIDE, comicYear = newcomicYears, characters=instance
+                    )
+                
 
     #This will test the function getCharacter()
 

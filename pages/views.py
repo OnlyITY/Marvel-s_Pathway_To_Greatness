@@ -44,10 +44,9 @@ def search(request):
             #data = marvelApi.getCharcterInfo(characterName)         
             myMarvel = Marvel()
             name, image, charId, description, c = myMarvel.getCharacter(characterName)
-            comInfo =  Comics.objects.all()
+            comInfo =  Comics.objects.filter(characters_id = charId)
             #getName = Characters.objects()
-            pa = Characters.objects.all().values()
-            myMarvel.getComics(charId)
+            a = myMarvel.getComics(charId, instance=c)
 
             PARAMS = {
                 'name': name,
@@ -55,7 +54,6 @@ def search(request):
                 'id': charId,
                 'description': description,
                 'comInfo': comInfo,
-                'pa': pa
             }
             return render(request, "pages/searchresults.html", PARAMS)
             #return render(request, "pages/searchresults.html", {"data": data})

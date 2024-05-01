@@ -19,12 +19,14 @@ class Characters(models.Model):
     characterImage = models.TextField(default="Image")
     characterDescription = models.TextField(default="Description")
 
+
+
 class Comics(models.Model):
     title = models.CharField(max_length=255)
     comicYear = models.IntegerField(default=1, null=True, blank=True)
     summary = models.TextField()
     linkForPurchase = models.CharField(max_length=500)
-    characters = models.ManyToManyField(Characters, through=u"ComicCharacters", related_name=u"CharComic")
+    characters = models.ForeignKey(Characters, on_delete=models.CASCADE, null=True, blank=True)
     comicIMG = models.TextField(default="image")
     comicID = models.IntegerField(default=1)
 
