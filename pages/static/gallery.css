@@ -1,13 +1,14 @@
 #title {
-    background-color: red;
+    background-color: red; /* Red background */
 }
 
 #comInfo {
-    background-color: lightgray;
+    background-color: lightgray;/* Lightgray background */
 }
 
 #Comics{
-    background-color: rgb(82, 82, 207);
+    background-color: rgb(82, 82, 207); /*Custom blue color */
+    text-align: center;
 }
 
 .btns button, #down{

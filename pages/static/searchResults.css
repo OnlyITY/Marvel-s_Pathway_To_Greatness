@@ -34,7 +34,7 @@ h1 {color:  whitesmoke;
     cursor: pointer;
     width: 100%;
     }
-  
+
 
 .image {display: block;
 width: 250px;
@@ -50,3 +50,22 @@ h1, .image{
     background-color: tan;
     box-sizing: content-box;
 }
+
+#info {
+    background-color: lightgray;/* Lightgray background */
+}
+
+#results{
+    background-color: rgb(82, 82, 207); /*Custom blue color */
+    text-align: center;
+}
+
+#comInfo{
+    background-color: rgb(82, 82, 207); /*Custom blue color */
+    
+}
+
+#title {
+    background-color: red; /* Red background */
+}
+
