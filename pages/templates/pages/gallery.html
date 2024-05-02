@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comics Gallery</title>
+    {%load static %}
+    <link rel="stylesheet" href = "{% static 'gallery.css' %}">
+</head>
+<body>
+    <button onclick="bottomFunction()" id="down" title="Goes to the bottom">Bottom</button>    
+    {% block content %}
+        {% for x in allComics %}
+            <ul id="Comics">
+                <h3 id="title"> {{x.title}} </h3>
+                <img id="image" src="{{x.comicIMG}}" height=500 width=500>
+
+                <div id="comInfo"> 
+                <p id = "sum"> {{x.summary}} <p>
+                <p id="Authors"> Comic Authors: {{x.comicAuthors}} </p>
+                <p id="appear"> Characters who appeared in this comic: {{x.characterAppearances}} </p>
+                </div>
+            </ul>
+        {% endfor %}
+    {% endblock %}
+    
+
+    <script src={% static "gallery.js" %}></script>
+
+    <div class="btns">
+       <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+       <button type="button">
+           <a href="{% url 'home' %}"> Go Home <a/>
+       </button>
+    </div>
+</body>
+</html>

@@ -79,6 +79,13 @@ def search(request):
         return render(request, "pages/home.html")
 
 
+def gallery(request):
+    allComics = Comics.objects.all()
+    Params = {
+        'allComics': allComics
+    }
+    return render(request, "pages/gallery.html", Params)
+
 
 def character_name_suggestions(request):
     query = request.GET.get('query', '')

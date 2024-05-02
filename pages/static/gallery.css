@@ -1,0 +1,21 @@
+#title {
+    background-color: red;
+}
+
+#comInfo {
+    background-color: lightgray;
+}
+
+#Comics{
+    background-color: rgb(82, 82, 207);
+}
+
+.btns button, #down{
+    background-color: #04AA6D; /* Green background */
+    border: 1px solid green; /* Green border */
+    color: white; /* White text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    width: 100%; /* Set a width if needed */
+    display: block; /* Make the buttons appear below each other */
+  }
