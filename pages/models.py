@@ -24,8 +24,9 @@ class Characters(models.Model):
 class Comics(models.Model):
     title = models.CharField(max_length=255)
     comicYear = models.IntegerField(default=1, null=True, blank=True)
-    summary = models.TextField()
+    summary = models.TextField(default="This character has no description")
     linkForPurchase = models.CharField(max_length=500)
+
     characters = models.ForeignKey(Characters, on_delete=models.CASCADE, null=True, blank=True)
     comicIMG = models.TextField(default="image")
     comicID = models.IntegerField(default=1)
