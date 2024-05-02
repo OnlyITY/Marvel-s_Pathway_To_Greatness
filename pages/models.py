@@ -26,7 +26,8 @@ class Comics(models.Model):
     comicYear = models.IntegerField(default=1, null=True, blank=True)
     summary = models.TextField(default="This character has no description")
     linkForPurchase = models.CharField(max_length=500)
-
+    comicAuthors = models.TextField(default="Authors")
+    characterAppearances = models.TextField(default="These characters show up")
     characters = models.ForeignKey(Characters, on_delete=models.CASCADE, null=True, blank=True)
     comicIMG = models.TextField(default="image")
     comicID = models.IntegerField(default=1)

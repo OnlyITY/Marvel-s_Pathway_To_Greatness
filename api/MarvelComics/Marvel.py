@@ -129,7 +129,14 @@ class Marvel():
                     comicAuthors = "This comic has an unknown writer/author"
                 else:
                     authors = comicData[i].get("creators").get("items")
-                    comicAuthors = [x['name'] for x in authors]
+                    comicAuthors  = [auth["name"]for auth in authors]
+                
+                #This gets the comic book character appearances!
+                if comicData[i].get("characters").get("available") == 0:
+                    characterAppear = "This comic has no one appearing! What!"
+                else:
+                    showChar = comicData[i].get("characters").get("items")
+                    characterAppear = [chara["name"]for chara in showChar]
                     
 
                 #Gets comic book image
@@ -141,7 +148,7 @@ class Marvel():
                     print("This comic is already in the database!")
                 else:
                     Comics.objects.create(
-                        title= comicTitle, summary=comicDesc, linkForPurchase=buyLink, comicIMG=comicImage, comicID=comicIDE, comicYear = newcomicYears, characters=instance
+                        title= comicTitle, summary=comicDesc, linkForPurchase=buyLink, comicIMG=comicImage, comicAuthors=comicAuthors, characterAppearances = characterAppear  ,comicID=comicIDE, comicYear = newcomicYears, characters=instance
                     )
                 
 
