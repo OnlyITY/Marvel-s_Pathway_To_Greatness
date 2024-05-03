@@ -57,7 +57,6 @@ def search(request):
             #data = marvelApi.getCharcterInfo(characterName)         
             myMarvel = Marvel()
             name, image, charId, description, c = myMarvel.getCharacter(characterName)
-            
             #getName = Characters.objects()
             myMarvel.getComics(charId, instance=c)
             comInfo =  Comics.objects.filter(characters_id = charId)

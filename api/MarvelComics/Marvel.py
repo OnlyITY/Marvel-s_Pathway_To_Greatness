@@ -146,6 +146,8 @@ class Marvel():
                 x = Comics.objects.filter(comicID=comicIDE).exists()
                 if (x):
                     print("This comic is already in the database!")
+                elif "image_not_available" in comicImage or "Nothing is okay. This issue is so shocking and troubling we can't even show you the cover!." in comicDesc:
+                    pass
                 else:
                     Comics.objects.create(
                         title= comicTitle, summary=comicDesc, linkForPurchase=buyLink, comicIMG=comicImage, comicAuthors=comicAuthors, characterAppearances = characterAppear  ,comicID=comicIDE, comicYear = newcomicYears, characters=instance

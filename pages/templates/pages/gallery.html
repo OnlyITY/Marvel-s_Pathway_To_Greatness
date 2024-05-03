@@ -28,10 +28,9 @@
     <script src={% static "gallery.js" %}></script>
 
     <div class="btns">
-       <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
-       <button type="button">
-           <a href="{% url 'home' %}"> Go Home <a/>
-       </button>
+       <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>       
+    <a href="{% url 'home' %}"><button type="button"> Go Home </button><a/>
+       
     </div>
 </body>
 </html>
